@@ -6,11 +6,10 @@ public interface PhoneInterface {
     void addContact(String name, String phoneNumber);
     Contact getContact(int index);
     void sendMessage(String phoneNumber, String message);
-//     public List<Message> getMessage(String phoneNumber);
+    public void getMessage(String phoneNumber);
 //
-//    public void call();
-//
-//    public void viewHistory();
+    public void call(String phoneNumber);
+   public void viewHistory();
 
 
 

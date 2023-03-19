@@ -24,35 +24,17 @@ public class App {
 
         phone.sendMessage("0728291607", "Bogdi are mere");
         phone.sendMessage("0728291607", "Bogdi are pere");
-//        phone.messageMap("0745359497");
 
-        System.out.println("Spune ceva plz "+ phone.getNumber(0));
-
-
-//        phone.messageMap("0745359497",phone.messages);
-//        phone.messageMap("0728291607",phone.messages);
-//
-//        phone.getMessage("0745359497");
-//        phone.getMessage("0728291607");
+        phone.getMessage("0745359497");
+        phone.getMessage("0728291607");
 
 
 
+        phone.call("0745123456");
+        phone.call("0745654321");
+        phone.call("0745123456");
 
-//
-//// send a message to the first contact from the previously listed
-//
-//// max number of characters - 100
-//
-//        phone.sendMessage("phone number", "message content");
-//
-//        phone.getFirstMessage("phone number");
-//
-//        phone.getSecondMessage("phone number");
-//
-//// make a call to the second contact from the previously listed
-//
-//        phone.call("second phone number");
-//
-//        phone.viewHistory();
+
+        phone.viewHistory();
     }
 }

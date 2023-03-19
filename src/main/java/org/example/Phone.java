@@ -6,15 +6,17 @@ import java.util.Iterator;
 abstract class Phone implements PhoneInterface {
     protected final Integer batteryLife;
     List<Contact> contact = new ArrayList<>();
-    List<Message> messages = new ArrayList<>();
-    List<PhoneNumber> listOfPhoneNumber = new ArrayList<>();
+    Map<String, List<String>> messages = new HashMap<>();
+    List<String> calls =new ArrayList<>();
+
     String phoneNumber;
-    List<Message> messagesFromAPhoneNumber = new ArrayList<>();
+   Integer battery ;
 
 
     Phone(Integer batteryLife) {
 
         this.batteryLife = batteryLife;
+        battery = batteryLife;
 
     }
 
@@ -41,81 +43,48 @@ abstract class Phone implements PhoneInterface {
     }
 
     public void sendMessage(String phoneNumber, String message) {
-        Map<PhoneNumber, List<String>> mapForMessages = new HashMap<>();
-//
-//        Message messagesOfNumber = new Message(message);
+        if( message.length()<=500) {
+            for (int i = 0; i < contact.size(); i++) {
+                if (getNumber(i) == phoneNumber) {
+                    if (!messages.containsKey(phoneNumber)) {
+                        messages.put(phoneNumber, new ArrayList<>());
+                    }
+                    messages.get(phoneNumber).add(message);
+                    System.out.println("Message " + "'" + message + "'"
+                            + " is sent to phone number " + phoneNumber);
 
-        PhoneNumber theNumber = new PhoneNumber(phoneNumber);
-
-        theNumber.addNumber(phoneNumber);
-        theNumber.addMessages(message);
-
-        mapForMessages.put(theNumber, theNumber.getMessages());
-        System.out.println("The message is send " + mapForMessages);
-
+                    battery -=  1;
+                }
+            }
+        }
+        else {
+                System.out.println("The message is to long, it can't be sent");
+            }
     }
-     public  seeMessagesOfANumber(PhoneNumber number){
 
-         Map<PhoneNumber, List<String>> mapForMessages = new HashMap<>();
+    public void getMessage(String phoneNumber) {
 
-         if (mapForMessages.keySet()== number)
-             System.out.println();
-    return
-     }
+        if (messages.containsKey(phoneNumber)) {
+            System.out.println("Messages for " + phoneNumber + ":");
+            for (String message1 : messages.get(phoneNumber)) {
+                System.out.println(message1);
+            }
+        } else {
+            System.out.println("No messages found for " + phoneNumber + ".");
+        }
+    }
 
-
-//    public void sendMessage(String phoneNumber, String message) {
-//        Message messagesOfNumber = new Message(message);
-//        PhoneNumber theNumber = new PhoneNumber(phoneNumber);
-//
-//        listOfPhoneNumber.add(theNumber);
-//        for (int i=0 ; i< listOfPhoneNumber.size(); i++){
-//            if (listOfPhoneNumber.get(i).equals(phoneNumber)){
-//
-//
-//            }
-//
-//        }
-//
-//        messages.add(messagesOfNumber);
-//        System.out.println("Pt nrde telefon  " + phoneNumber + " mesajul este " + messages);
-//
-//    }
-
-
-//    public List<Message> getMessage(String phoneNumber) {
-//
-//
-//        Iterator<Message> it = messages.iterator();
-//        while (it.hasNext()) {
-//
-//            messagesFromAPhoneNumber.add(it.next());
-//        }
-//
-//        System.out.println("Mesajele sunt" + messagesFromAPhoneNumber);
-//
-//
-//        return messagesFromAPhoneNumber;
-//    }
+    public void call(String phoneNumber){
+        calls.add(phoneNumber);
+        System.out.println("The phone has made a call to phone number " + phoneNumber);
+        battery-= 2;
+    }
+    public void viewHistory(){
+        System.out.println("The history of calls is: " + calls);
+    }
 }
 
 
-//        System.out.println("The messages send at the number: "
-//                + phoneNumber + " are: " + messages);
-
-
-//
-//    @Override
-//    public void call() {
-//
-//    }
-//
-//    @Override
-//    public void viewHistory() {
-//
-//
-//    }
-//
 
 
 
